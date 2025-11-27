@@ -37,6 +37,10 @@ To query a different channel without editing `.env`, supply `--channel`:
 ```bash
 uv run python youtube_info.py --channel AnotherChannelName
 ```
+Or, when using the Makefile, pass the `CHANNEL` variable:
+```bash
+make run CHANNEL=AnotherChannelName
+```
 
 ## Makefile targets
 
@@ -47,6 +51,6 @@ uv run python youtube_info.py --channel AnotherChannelName
 
 ## Notes
 
-- The script uses the `CHANNEL_USERNAME` environment variable by default, but `--channel` takes precedence if provided.
-- If you only have a channel ID, use that value for `CHANNEL_USERNAME` or `--channel` (the API accepts both usernames and IDs).
-- The YouTube Data API enforces quotas; plan for retries/backoff if you extend this script.
+- The script uses the `CHANNEL_USERNAME` environment variable by default, but `--channel` (or `make run CHANNEL=...`) takes precedence if provided.
+- `CHANNEL_USERNAME` / `--channel` accepts either a username or channel ID (`UC...`). If the uploads playlist is unavailable, the script transparently falls back to listing videos via the search API.
+- The YouTube Data API enforces quotas; plan for retries/backoff if you extend this script, and ensure "YouTube Data API v3" is enabled for your API key.
